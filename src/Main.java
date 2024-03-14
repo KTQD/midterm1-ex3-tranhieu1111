@@ -1,29 +1,26 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
-public class ReplaceWordsInFile {
+public class Main {
     public static void main(String[] args) {
-        String inputFile = "input.txt";
-        String outputFile = "output.txt";
+        String input = "input.txt";
+        String output = "output.txt";
+        thayTheFile(input, output);
+    }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+    private static void thayTheFile(String input, String output) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(input));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
 
             String line;
             while ((line = reader.readLine()) != null) {
-
                 line = line.replaceAll("Nha Trang", "Vũng Tàu");
                 writer.write(line);
                 writer.newLine();
             }
-            System.out.println("Đã thay thế và ghi vào file " + outputFile);
 
+            System.out.println("Thay thế thành công.");
         } catch (IOException e) {
-            System.err.println("Xảy ra lỗi khi đọc hoặc ghi file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
-
